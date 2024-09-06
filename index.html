@@ -121,7 +121,7 @@
                 .then(data => {
                     const token = data.token; // Assuming the response includes a token field
                     const returnURL = form.returnURL.value;
-                    const generatedLink = `https://dev.fvpvportal.com/?token=${encodeURIComponent(token)})}`;
+                    const generatedLink = `https://dev.fvpvportal.com/?token=${encodeURIComponent(token)}`;
                     document.getElementById('response').innerText = JSON.stringify(data, null, 2);
                     document.getElementById('link').innerHTML = `<p>Generated Link: <a href="${generatedLink}" target="_blank">${generatedLink}</a></p>`;
                 })
