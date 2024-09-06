@@ -120,7 +120,7 @@
                 .then(data => {
                     const token = data.token; // Assuming the response includes a token field
                     const returnURL = form.returnURL.value;
-                    const generatedLink = `https://portal.fvpvportal.com/?token=${encodeURIComponent(token)}&return_url=${encodeURIComponent(returnURL)}`;
+                    const generatedLink = `https://dev.portal.fvpvportal.com/?token=${encodeURIComponent(token)}&return_url=${encodeURIComponent(returnURL)}`;
                     document.getElementById('response').innerText = JSON.stringify(data, null, 2);
                     document.getElementById('link').innerHTML = `<p>Generated Link: <a href="${generatedLink}" target="_blank">${generatedLink}</a></p>`;
                 })
