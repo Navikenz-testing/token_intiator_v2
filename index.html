@@ -106,7 +106,8 @@
                 firstname: form.firstname.value,
                 lastname: form.lastname.value,
                 ipaddress: form.ipaddress.value,
-                languagecode: form.languagecode.value
+                languagecode: form.languagecode.value,
+                return_url: form.returnURL.value
             };
 
             fetch('https://lytk2dzfuxmbquld5jyqpjkpjy0umwpg.lambda-url.us-east-1.on.aws/token', {
@@ -120,7 +121,7 @@
                 .then(data => {
                     const token = data.token; // Assuming the response includes a token field
                     const returnURL = form.returnURL.value;
-                    const generatedLink = `https://dev.fvpvportal.com/?token=${encodeURIComponent(token)}&return_url=${encodeURIComponent(returnURL)}`;
+                    const generatedLink = `https://dev.fvpvportal.com/?token=${encodeURIComponent(token)})}`;
                     document.getElementById('response').innerText = JSON.stringify(data, null, 2);
                     document.getElementById('link').innerHTML = `<p>Generated Link: <a href="${generatedLink}" target="_blank">${generatedLink}</a></p>`;
                 })
