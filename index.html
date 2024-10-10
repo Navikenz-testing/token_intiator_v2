@@ -121,8 +121,8 @@
                 .then(data => {
                     const token = data.token; // Assuming the response includes a token field
                     const returnURL = form.returnURL.value;
-                    const generatedLink = `https://dev.fvpvportal.com/?token=${encodeURIComponent(token)}&language=${encodeURIComponent(data.languagecode)}`;
-                    document.getElementById('response').innerText = `<p>Generated Token: ${encodeURIComponent(token)}</p>`;
+                    const generatedLink = `https://dev.fvpvportal.com/?token=${encodeURIComponent(token)}&language=${encodeURIComponent(form.languagecode.value)}`;
+                    document.getElementById('response').innerHTML = `<p>Generated Token: ${encodeURIComponent(token)}</p>`;
                     document.getElementById('link').innerHTML = `<p>Generated Link: <a href="${generatedLink}" target="_blank">${generatedLink}</a></p>`;
                 })
                 .catch(error => {
