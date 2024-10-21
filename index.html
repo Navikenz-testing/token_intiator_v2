@@ -148,7 +148,7 @@
 </head>
 <body>
     <div class="container">
-        <h2>Submit Data</h2>
+        <h2>PORTAL</h2>
         <form id="apiForm">
             <div class="form-group">
                 <label for="subscriptionkey">Subscription Key</label>
@@ -234,7 +234,7 @@
                 const returnURL = form.returnURL.value;
                 const generatedLink = `https://dev.fvpvportal.com/?token=${encodeURIComponent(token)}&language=${encodeURIComponent(form.languagecode.value)}`;
                 document.getElementById('response').innerHTML = `<p>Generated Token: ${encodeURIComponent(token)}</p>`;
-                document.getElementById('link').innerHTML = `<p>Generated Link: <a href="${generatedLink}" target="_blank">${generatedLink}</a></p>`;
+                document.getElementById('link').innerHTML = `<p>FIDA Link: <a href="${generatedLink}" target="_blank">${generatedLink}</a></p>`;
             })
             .catch(error => {
                 document.getElementById('response').innerText = 'Error: ' + error.message;
