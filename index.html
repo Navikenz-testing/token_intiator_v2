@@ -99,6 +99,17 @@
                 <label for="returnURL">Return URL</label>
                 <input type="text" id="returnURL" name="returnURL" value="https://www.vfsglobal.com/en/individuals/index.html">
             </div>
+            <div class="form-group">
+                <label for="route">Route</label>
+                <div>
+                    <input type="radio" id="route1" name="route" value="route-1">
+                    <label for="route1">Route-1 (Liveness Check and Passport Check)</label>
+                </div>
+                <div>
+                    <input type="radio" id="route2" name="route" value="route-2">
+                    <label for="route2">Route-2 (Liveness Check)</label>
+                </div>
+            </div>
             <button type="button" onclick="submitForm()">Submit</button>
         </form>
         <div class="response" id="response"></div>
@@ -117,6 +128,7 @@
                 languagecode: form.languagecode.value,
                 dateofbirth: form.dateofbirth.value,
                 dateofexpiry: form.dateofexpiry.value,
+                route: form.route.value,
                 return_url: form.returnURL.value
             };
 
