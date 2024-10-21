@@ -1,71 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API Form Submission</title>
     <style>
+        :root {
+            --primary-color: #4361ee;
+            --hover-color: #3046c5;
+            --background-color: #f8f9fa;
+            --card-background: #ffffff;
+            --text-color: #2b2d42;
+            --border-color: #e9ecef;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
-            background-color: #f0f0f0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
         }
 
         .container {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            background: var(--card-background);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 500px;
+            margin: 20px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.8rem;
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 1.2rem;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-color);
         }
 
-        .form-group input {
+        .form-group input[type="text"] {
             width: 100%;
-            padding: 8px;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.95rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
             box-sizing: border-box;
         }
 
-        .form-group button {
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
+        .form-group input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+        }
+
+        .radio-option:hover {
+            background-color: var(--background-color);
+        }
+
+        .radio-option input[type="radio"] {
+            width: 1.2rem;
+            height: 1.2rem;
+            margin: 0;
+            accent-color: var(--primary-color);
+        }
+
+        .radio-option label {
+            margin: 0;
             cursor: pointer;
         }
 
-        .form-group button:hover {
-            background-color: #0056b3;
+        button {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 1rem;
         }
 
-        .response {
-            margin-top: 20px;
+        button:hover {
+            background-color: var(--hover-color);
+        }
+
+        .response, #link {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background-color: var(--background-color);
+            border-radius: 6px;
+            word-break: break-all;
+        }
+
+        #link a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        #link a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+                padding: 1.5rem;
+            }
         }
     </style>
 </head>
-
 <body>
     <div class="container">
         <h2>Submit Data</h2>
         <form id="apiForm">
             <div class="form-group">
                 <label for="subscriptionkey">Subscription Key</label>
-                <input type="text" id="subscriptionkey" name="subscriptionkey"
-                    value="c464a5de-1652-40e2-9978-fb69e2558695">
+                <input type="text" id="subscriptionkey" name="subscriptionkey" value="c464a5de-1652-40e2-9978-fb69e2558695">
             </div>
             <div class="form-group">
                 <label for="documentnumber">Document Number</label>
@@ -101,13 +188,15 @@
             </div>
             <div class="form-group">
                 <label for="route">Route</label>
-                <div>
-                    <input type="radio" id="route1" name="route" value="route-1">
-                    <label for="route1">Route-1 (Liveness Check and Passport Check)</label>
-                </div>
-                <div>
-                    <input type="radio" id="route2" name="route" value="route-2">
-                    <label for="route2">Route-2 (Liveness Check)</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="route1" name="route" value="route-1">
+                        <label for="route1">Route-1 (Liveness Check and Passport Check)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="route2" name="route" value="route-2">
+                        <label for="route2">Route-2 (Liveness Check)</label>
+                    </div>
                 </div>
             </div>
             <button type="button" onclick="submitForm()">Submit</button>
@@ -139,18 +228,18 @@
                 },
                 body: JSON.stringify(data)
             })
-                .then(response => response.json())
-                .then(data => {
-                    const token = data.token; // Assuming the response includes a token field
-                    const returnURL = form.returnURL.value;
-                    const generatedLink = `https://dev.fvpvportal.com/?token=${encodeURIComponent(token)}&language=${encodeURIComponent(form.languagecode.value)}`;
-                    document.getElementById('response').innerHTML = `<p>Generated Token: ${encodeURIComponent(token)}</p>`;
-                    document.getElementById('link').innerHTML = `<p>Generated Link: <a href="${generatedLink}" target="_blank">${generatedLink}</a></p>`;
-                })
-                .catch(error => {
-                    document.getElementById('response').innerText = 'Error: ' + error.message;
-                });
+            .then(response => response.json())
+            .then(data => {
+                const token = data.token;
+                const returnURL = form.returnURL.value;
+                const generatedLink = `https://dev.fvpvportal.com/?token=${encodeURIComponent(token)}&language=${encodeURIComponent(form.languagecode.value)}`;
+                document.getElementById('response').innerHTML = `<p>Generated Token: ${encodeURIComponent(token)}</p>`;
+                document.getElementById('link').innerHTML = `<p>Generated Link: <a href="${generatedLink}" target="_blank">${generatedLink}</a></p>`;
+            })
+            .catch(error => {
+                document.getElementById('response').innerText = 'Error: ' + error.message;
+            });
         }
     </script>
-</body> 
+</body>
 </html>
