@@ -187,6 +187,10 @@
                 <input type="text" id="returnURL" name="returnURL" value="https://www.vfsglobal.com/en/individuals/index.html">
             </div>
             <div class="form-group">
+                <label for="callbackURL">Callback URL</label>
+                <input type="text" id="callbackURL" name="callbackURL" value="https://sn7cme7cfuh3f73kk45obw34q40ycdti.lambda-url.us-east-1.on.aws/callback-test">
+            </div>
+            <div class="form-group">
                 <label for="route">Route</label>
                 <div class="radio-group">
                     <div class="radio-option">
@@ -218,7 +222,8 @@
                 dateofbirth: form.dateofbirth.value,
                 dateofexpiry: form.dateofexpiry.value,
                 route: form.route.value || 'route-1',
-                return_url: form.returnURL.value
+                return_url: form.returnURL.value,
+                callback_url: form.callbackURL.value
             };
 
             fetch('https://lytk2dzfuxmbquld5jyqpjkpjy0umwpg.lambda-url.us-east-1.on.aws/token', {
