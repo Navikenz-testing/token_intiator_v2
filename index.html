@@ -227,8 +227,7 @@
                 dateofexpiry: form.dateofexpiry.value,
                 route: form.route.value || 'route-1',
                 return_url: form.returnURL.value,
-                callback_url: form.callbackURL.value,
-                fingerprint: form.fingerprint.value
+                callback_url: form.callbackURL.value
             };
 
             fetch('https://lytk2dzfuxmbquld5jyqpjkpjy0umwpg.lambda-url.us-east-1.on.aws/token', {
