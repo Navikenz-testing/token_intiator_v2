@@ -242,7 +242,7 @@
             .then(data => {
                 const token = data.token;
                 const returnURL = form.returnURL.value;
-                const generatedLink = `https://dev.fvpvportal.com/?token=${encodeURIComponent(token)}&language=${encodeURIComponent(form.languagecode.value)}`;
+                const generatedLink = `https://dev.fvpvportal.com/?token=${encodeURIComponent(token)}&language=${encodeURIComponent(form.languagecode.value)}&vfsfv_fp=${encodeURIComponent(form.fingerprint.value)}`;
                 document.getElementById('response').innerHTML = `<p>Generated Token: ${encodeURIComponent(token)}</p>`;
                 document.getElementById('link').innerHTML = `<p>FIDA Link: <a href="${generatedLink}" target="_blank">${generatedLink}</a></p>`;
             })
