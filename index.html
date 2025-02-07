@@ -191,10 +191,6 @@
                 <input type="text" id="callbackURL" name="callbackURL" value="https://sn7cme7cfuh3f73kk45obw34q40ycdti.lambda-url.us-east-1.on.aws/callback-test">
             </div>
             <div class="form-group">
-                <label for="callbackURL">Fingerprint String</label>
-                <input type="text" id="fingerprint" name="fingerprint" value="JA4=t13d1516h2_acb858a92679_e5627efa2ab1">
-            </div>
-            <div class="form-group">
                 <label for="route">Route</label>
                 <div class="radio-group">
                     <div class="radio-option">
@@ -241,7 +237,7 @@
             .then(data => {
                 const token = data.token;
                 const returnURL = form.returnURL.value;
-                const generatedLink = `https://dev.fvpvportal.com/?token=${encodeURIComponent(token)}&language=${encodeURIComponent(form.languagecode.value)}&vfsfv_fp=${encodeURIComponent(form.fingerprint.value)}`;
+                const generatedLink = `https://dev.fvpvportal.com/?token=${encodeURIComponent(token)}&language=${encodeURIComponent(form.languagecode.value)}`;
                 document.getElementById('response').innerHTML = `<p>Generated Token: ${encodeURIComponent(token)}</p>`;
                 document.getElementById('link').innerHTML = `<p>FIDA Link: <a href="${generatedLink}" target="_blank">${generatedLink}</a></p>`;
             })
