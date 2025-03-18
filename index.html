@@ -55,7 +55,7 @@
             color: var(--text-color);
         }
 
-        .form-group input[type="text"] {
+        .form-group input {
             width: 100%;
             padding: 0.8rem;
             border: 1px solid var(--border-color);
@@ -65,7 +65,7 @@
             box-sizing: border-box;
         }
 
-        .form-group input[type="text"]:focus {
+        .form-group input:focus {
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
@@ -91,16 +91,11 @@
             background-color: var(--background-color);
         }
 
-        .radio-option input[type="radio"] {
+        .radio-option input {
             width: 1.2rem;
             height: 1.2rem;
             margin: 0;
             accent-color: var(--primary-color);
-        }
-
-        .radio-option label {
-            margin: 0;
-            cursor: pointer;
         }
 
         button {
@@ -121,29 +116,20 @@
             background-color: var(--hover-color);
         }
 
-        .response, #link {
+        .response, #link, #link2 {
             margin-top: 1.5rem;
             padding: 1rem;
             background-color: var(--background-color);
             border-radius: 6px;
-            word-break: break-all;
+            word-break: break-word;
         }
 
-        #link a {
+        #link a, #link2 a {
             color: var(--primary-color);
             text-decoration: none;
         }
 
-        #link a:hover {
-            text-decoration: underline;
-        }
-
-        #link2 a {
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-
-        #link2 a:hover {
+        #link a:hover, #link2 a:hover {
             text-decoration: underline;
         }
 
@@ -176,28 +162,12 @@
                 <input type="text" id="lastname" name="lastname" value="Surname">
             </div>
             <div class="form-group">
-                <label for="ipaddress">IP Address</label>
-                <input type="text" id="ipaddress" name="ipaddress" value="127.0.0.1">
+                <label for="dateofbirth">Date of Birth (YYYY-MM-DD)</label>
+                <input type="text" id="dateofbirth" name="dateofbirth" placeholder="YYYY-MM-DD">
             </div>
             <div class="form-group">
-                <label for="languagecode">Language Code</label>
-                <input type="text" id="languagecode" name="languagecode" value="en">
-            </div>
-            <div class="form-group">
-                <label for="dateofbirth">Date of Birth (in YYYY-MM-DD)</label>
-                <input type="text" id="dateofbirth" name="dateofbirth" value="YYYY-MM-DD">
-            </div>
-            <div class="form-group">
-                <label for="dateofexpiry">Passport Expiry Date (in YYYY-MM-DD)</label>
-                <input type="text" id="dateofexpiry" name="dateofexpiry" value="YYYY-MM-DD">
-            </div>
-            <div class="form-group">
-                <label for="returnURL">Return URL</label>
-                <input type="text" id="returnURL" name="returnURL" value="https://www.vfsglobal.com/en/individuals/index.html">
-            </div>
-            <div class="form-group">
-                <label for="callbackURL">Callback URL</label>
-                <input type="text" id="callbackURL" name="callbackURL" value="https://sn7cme7cfuh3f73kk45obw34q40ycdti.lambda-url.us-east-1.on.aws/callback-test">
+                <label for="dateofexpiry">Passport Expiry Date (YYYY-MM-DD)</label>
+                <input type="text" id="dateofexpiry" name="dateofexpiry" placeholder="YYYY-MM-DD">
             </div>
             <div class="form-group">
                 <label for="route">Route</label>
@@ -216,45 +186,34 @@
         </form>
         <div class="response" id="response"></div>
         <div id="link"></div>
+        <div id="link2"></div>
     </div>
 
     <script>
         function submitForm() {
             const form = document.getElementById('apiForm');
+            const routeValue = document.querySelector('input[name="route"]:checked').value;
+
             const data = {
                 subscriptionkey: form.subscriptionkey.value,
                 documentnumber: form.documentnumber.value,
                 firstname: form.firstname.value,
                 lastname: form.lastname.value,
-                ipaddress: form.ipaddress.value,
-                languagecode: form.languagecode.value,
                 dateofbirth: form.dateofbirth.value,
                 dateofexpiry: form.dateofexpiry.value,
-                route: form.route.value || 'route-1',
-                return_url: form.returnURL.value,
-                callback_url: form.callbackURL.value
+                route: routeValue
             };
 
             fetch('https://lytk2dzfuxmbquld5jyqpjkpjy0umwpg.lambda-url.us-east-1.on.aws/token', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             })
-            .then(response => response.json())
+            .then(response => response.ok ? response.json() : Promise.reject(response))
             .then(data => {
-                const token = data.token;
-                const returnURL = form.returnURL.value;
-                const generatedLink = `https://dev.fvpvportal.com/?token=${encodeURIComponent(token)}&language=${encodeURIComponent(form.languagecode.value)}`;
-                const generatedLink2 = `https://7dqltfxdqc5bp6ydq5ecivf5jm0rwmqa.lambda-url.us-east-1.on.aws/docs`;
-                document.getElementById('response').innerHTML = `<p>Generated Token: ${(token)}</p>`;
-                document.getElementById('link').innerHTML = `<p>FIDA Link: <a href="${generatedLink}" target="_blank">${generatedLink}</a></p>`;
-                document.getElementById('link2').innerHTML = `<p>OCR Swagger Docs: <a href="${generatedLink2}" target="_blank">${generatedLink2}</a></p>`;
+                document.getElementById('response').innerHTML = `<p>Generated Token: ${data.token}</p>`;
             })
-            .catch(error => {
-                document.getElementById('response').innerText = 'Error: ' + error.message;
-            });
+            .catch(error => document.getElementById('response').innerText = 'Error: ' + error.statusText);
         }
     </script>
 </body>
