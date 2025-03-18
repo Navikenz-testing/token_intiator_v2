@@ -138,6 +138,15 @@
             text-decoration: underline;
         }
 
+        #link2 a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        #link2 a:hover {
+            text-decoration: underline;
+        }
+
         @media (max-width: 600px) {
             .container {
                 margin: 10px;
@@ -241,7 +250,7 @@
                 const generatedLink2 = `https://7dqltfxdqc5bp6ydq5ecivf5jm0rwmqa.lambda-url.us-east-1.on.aws/docs`;
                 document.getElementById('response').innerHTML = `<p>Generated Token: ${(token)}</p>`;
                 document.getElementById('link').innerHTML = `<p>FIDA Link: <a href="${generatedLink}" target="_blank">${generatedLink}</a></p>`;
-                document.getElementById('link').innerHTML = `<p>OCR Swagger Docs: <a href="${generatedLink2}" target="_blank">${generatedLink2}</a></p>`;
+                document.getElementById('link2').innerHTML = `<p>OCR Swagger Docs: <a href="${generatedLink2}" target="_blank">${generatedLink2}</a></p>`;
             })
             .catch(error => {
                 document.getElementById('response').innerText = 'Error: ' + error.message;
