@@ -121,7 +121,7 @@
             background-color: var(--hover-color);
         }
 
-        .response, #link {
+        .response, #link, #ocrDocs {
             margin-top: 1.5rem;
             padding: 1rem;
             background-color: var(--background-color);
@@ -129,12 +129,12 @@
             word-break: break-all;
         }
 
-        #link a {
+        #link a, #ocrDocs a {
             color: var(--primary-color);
             text-decoration: none;
         }
 
-        #link a:hover {
+        #link a:hover, #ocrDocs a:hover {
             text-decoration: underline;
         }
 
@@ -207,6 +207,9 @@
         </form>
         <div class="response" id="response"></div>
         <div id="link"></div>
+        <div id="ocrDocs">
+            <p>OCR Swagger Docs: <a href="https://7dqltfxdqc5bp6ydq5ecivf5jm0rwmqa.lambda-url.us-east-1.on.aws/docs" target="_blank">https://7dqltfxdqc5bp6ydq5ecivf5jm0rwmqa.lambda-url.us-east-1.on.aws/docs</a></p>
+        </div>
     </div>
 
     <script>
@@ -240,6 +243,7 @@
                 const generatedLink = `https://dev.fvpvportal.com/?token=${encodeURIComponent(token)}&language=${encodeURIComponent(form.languagecode.value)}`;
                 document.getElementById('response').innerHTML = `<p>Generated Token: ${(token)}</p>`;
                 document.getElementById('link').innerHTML = `<p>FIDA Link: <a href="${generatedLink}" target="_blank">${generatedLink}</a></p>`;
+                document.getElementById('ocrDocs').innerHTML = `<p>OCR Swagger Docs: <a href="https://7dqltfxdqc5bp6ydq5ecivf5jm0rwmqa.lambda-url.us-east-1.on.aws/docs" target="_blank">https://7dqltfxdqc5bp6ydq5ecivf5jm0rwmqa.lambda-url.us-east-1.on.aws/docs</a></p>`;
             })
             .catch(error => {
                 document.getElementById('response').innerText = 'Error: ' + error.message;
