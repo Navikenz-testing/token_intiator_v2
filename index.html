@@ -170,6 +170,14 @@
                 <input type="text" id="dateofexpiry" name="dateofexpiry" placeholder="YYYY-MM-DD">
             </div>
             <div class="form-group">
+                <label for="ipaddress">IP Address</label>
+                <input type="text" id="ipaddress" name="ipaddress" placeholder="Enter IP Address">
+            </div>
+            <div class="form-group">
+                <label for="languagecode">Language Code</label>
+                <input type="text" id="languagecode" name="languagecode" placeholder="e.g., en, es, fr">
+            </div>
+            <div class="form-group">
                 <label for="route">Route</label>
                 <div class="radio-group">
                     <div class="radio-option">
@@ -201,6 +209,8 @@
                 lastname: form.lastname.value,
                 dateofbirth: form.dateofbirth.value,
                 dateofexpiry: form.dateofexpiry.value,
+                ipaddress: form.ipaddress.value,
+                languagecode: form.languagecode.value,
                 route: routeValue
             };
 
